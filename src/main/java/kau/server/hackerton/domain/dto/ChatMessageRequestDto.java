@@ -1,4 +1,4 @@
-package kau.server.hackerton.entity;
+package kau.server.hackerton.domain.dto;
 
 import lombok.*;
 
@@ -7,9 +7,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Message {
+public class ChatMessageRequestDto {
+
+    private Long channelId;
     private String sender;
-    private Integer channelId;
     private String chat;
-    private String time;
 }

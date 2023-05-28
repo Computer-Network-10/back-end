@@ -19,7 +19,7 @@ public class HackertonApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping( "/**")
-						.allowedOrigins("http://localhost:3000") //talend api
+						.allowedOrigins("https://deliverus.online","http://localhost:3000", "chrome-extension://aejoelaoggembcahagimdiliamlcdmfm","http://localhost:3001") //talend api
 						.allowedMethods("*")
 						.maxAge(3000)
 						.allowCredentials(true);
