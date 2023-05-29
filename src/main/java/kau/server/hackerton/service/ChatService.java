@@ -92,6 +92,15 @@ public class ChatService{
         try {
             Optional<Member> member = chatRepository.findMemberByName(name);
             chatRepository.deleteMember(member.get());
+
+            ChatMessage chatMessage = ChatMessage.builder()
+                    .type(-1L)
+                    .time(setTime())
+                    .sender(name)
+                    .chat(name + "님이 퇴장하셨습니다!")
+                    .build();
+            simpMessagingTemplate.convertAndSend("/sub/chat/1", chatMessage);
+
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }

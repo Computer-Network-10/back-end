@@ -45,6 +45,7 @@ public class ChatController {
     public ResponseEntity<String> deleteMember(@PathVariable("member")String member){
         try{
             chatService.deleteMember(member);
+
             return new ResponseEntity<>("Delete Success", HttpStatus.OK);
         }catch (Exception e){
             log.info(e.getMessage());
