@@ -1,6 +1,7 @@
 package kau.server.hackerton.controller;
 
 import kau.server.hackerton.domain.dto.ChatMessageRequestDto;
+import kau.server.hackerton.domain.dto.PrivateInfoRequestDto;
 import kau.server.hackerton.domain.entity.Member;
 import kau.server.hackerton.service.ChatService;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +46,7 @@ public class ChatController {
     public ResponseEntity<String> deleteMember(@PathVariable("member")String member){
         try{
             chatService.deleteMember(member);
-
+            log.info(member+" deleted");
             return new ResponseEntity<>("Delete Success", HttpStatus.OK);
         }catch (Exception e){
             log.info(e.getMessage());
@@ -64,10 +65,9 @@ public class ChatController {
         }
     }
 
-    @EventListener
-    public void disconnected(SessionDisconnectEvent event){
-//        StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
-//        String username = (String) headerAccessor.getSessionAttributes().get("username");
-        log.info("연결이 끊겼다."+event.toString());
+    @PostMapping("api/private")
+    public ResponseEntity<String> sendPrivateInfo(@RequestBody PrivateInfoRequestDto requestDto) {
+        log.info("클라이언트로부터 정보 : " + requestDto.getInfo());
+        return new ResponseEntity<>(requestDto.getInfo(), HttpStatus.OK);
     }
 }
